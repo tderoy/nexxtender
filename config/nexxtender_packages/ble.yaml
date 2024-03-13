@@ -63,3 +63,9 @@ switch:
       - globals.set:
           id: g_ble_client_manual_disconnect
           value: '1'
+
+button:
+  - platform: restart
+    id: restart_device
+    name: Restart Device
+    entity_category: diagnostic
