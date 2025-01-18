@@ -1,6 +1,7 @@
 packages:
   esp: !include nexxtender_packages/esp.yaml
-  #webserver: !include nexxtender_packages/webserver.yaml # secret esphome_admin_password required
+  esp_s3: !include nexxtender_packages/esp.s3.yaml
+  webserver: !include nexxtender_packages/webserver.yaml # secret esphome_admin_password required
   api: !include nexxtender_packages/api.yaml # secrets esphome_admin_password, wifi_ssid, wifi_password & esphome_api_key required
   time: !include nexxtender_packages/time.yaml
   ble: !include nexxtender_packages/ble.yaml # secrets nexxtender_mac & nexxtender_passkey required
@@ -15,8 +16,8 @@ packages:
   #dev_debug: !include nexxtender_packages/dev_debug.yaml
   
 substitutions:
-  # device_name: nexxtender
-  # friendly_name: Nexxtender
+   device_name: nexxtender
+   friendly_name: Nexxtender
   # charging_mode_eco_mono_threshold: "8"
   # charging_mode_eco_bi_threshold: "14"
   # charging_mode_eco_tri_threshold: "20"
