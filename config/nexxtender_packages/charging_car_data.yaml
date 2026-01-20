@@ -136,9 +136,8 @@ text_sensor:
     ble_client_id: ${device_name}_ble_client_id
     service_uuid: ${ble_uuid_receive_service}
     characteristic_uuid: ${ble_uuid_charging_car_characteristic}
-    notify: true
-    update_interval: never
-    on_notify:
+    update_interval: 15s
+    on_value:
       then:
         lambda: |-
           if (x.empty()) { return; }

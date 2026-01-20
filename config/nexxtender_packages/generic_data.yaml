@@ -162,9 +162,8 @@ text_sensor:
     ble_client_id: ${device_name}_ble_client_id
     service_uuid: ${ble_uuid_receive_service}
     characteristic_uuid: ${ble_uuid_generic_status}
-    update_interval: never
-    notify: true
-    on_notify:
+    update_interval: 5s
+    on_value:
       then:
         lambda: |-
           static std::string prev_status; // Persist previous status across calls
@@ -263,12 +262,12 @@ text_sensor:
     service_uuid: ${ble_uuid_receive_service}
     characteristic_uuid: ${ble_uuid_generic_data}
     entity_category: "config"
+    update_interval: 60s
     #filters:
     #lambda: |-
     #std::string hex_data = format_hex_pretty((uint8_t *) x.c_str(), x.length());
     #ESP_LOGD("${device_name}_generic_data", "Status is: %d", id(g_${generic_data_id_prefix}_status));
     #return hex_data;
-    notify: true
   - platform: template
     name: "${prefix_text_sensor}Nexxtender Time"
     id: ${generic_data_id_prefix}_human_time

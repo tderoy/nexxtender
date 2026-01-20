@@ -326,9 +326,8 @@ text_sensor:
     ble_client_id: ${device_name}_ble_client_id
     service_uuid: ${ble_uuid_receive_service}
     characteristic_uuid: ${ble_uuid_charging_basic_characteristic}
-    notify: true
-    update_interval: never
-    on_notify:
+    update_interval: 15s
+    on_value:
       then:
         lambda: |-
           if (x.empty()) { return; }
@@ -357,7 +356,7 @@ text_sensor:
               default:
                   value_string = "Unknown";
           }
-          id(g_${charging_basic_id_prefix}_discriminator) = value_string.c_str();;
+          id(g_${charging_basic_id_prefix}_discriminator) = value_string;
           id(${charging_basic_id_prefix}_discriminator).publish_state(value_string.c_str());
 
           switch (static_cast<char>(getByte(x, 3))) {
@@ -380,7 +379,7 @@ text_sensor:
                   break;
           }
           id(g_${charging_basic_id_prefix}_status_id) = value;
-          id(g_${charging_basic_id_prefix}_status) = value_string.c_str();
+          id(g_${charging_basic_id_prefix}_status) = value_string;
           id(${charging_basic_id_prefix}_status).publish_state(value_string.c_str());
 
           if (value_string == "Unplugged" && id(g_${charging_basic_id_prefix}_energy) > 0) {
