@@ -97,8 +97,9 @@ text_sensor:
     ble_client_id: ${device_name}_ble_client_id
     service_uuid: ${ble_uuid_receive_service}
     characteristic_uuid: ${ble_uuid_grid_characteristic}
-    update_interval: 15s
-    on_value:
+    notify: true
+    update_interval: never
+    on_notify:
       then:
         lambda: |-
           if (x.empty()) { return; }
