@@ -49,7 +49,6 @@ while getopts "Cculd" opt; do
       ;;
     l)
       do_logs=true
-      truncate -s 0 "${logFile}"
       ;;
     d)
       do_debug=true
@@ -109,6 +108,7 @@ fi
 if [ "$do_logs" = true ]; then
   echo ">>> Displaying logs (Ctrl+C to quit)..."
   export PYTHONIOENCODING=utf-8
+  truncate -s 0 "${logFile}"
   esphome logs "${yamlFile}" --device "${device}" | tee -a "${logFile}"
 fi
 

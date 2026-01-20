@@ -2,9 +2,8 @@
 # This configuration uses local files instead of GitHub packages
 
 packages:
-  common: !include config/nexxtender_packages/common_packages.yaml
-  esphome: !include config/nexxtender_packages/esphome.local.yaml
-  esp_s3: !include config/nexxtender_packages/esp.s3.yaml
+  common: !include config/local.yaml
+  esp_s3: !include config/s3.yaml
   mqtt: !include config/mqtt/false.yaml
   wifi: !include config/wifi.yaml
 
