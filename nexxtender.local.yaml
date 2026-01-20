@@ -1,32 +1,31 @@
-# Configuration locale pour ESP32 S3 Nexxtender
-# Cette configuration utilise les fichiers locaux au lieu des packages GitHub
+# Local configuration for ESP32 S3 Nexxtender
+# This configuration uses local files instead of GitHub packages
 
 packages:
   common: !include config/nexxtender_packages/common_packages.yaml
   esphome: !include config/nexxtender_packages/esphome.local.yaml
   esp_s3: !include config/nexxtender_packages/esp.s3.yaml
   mqtt: !include config/mqtt/false.yaml
-  webserver: !include config/webserver.yaml
   wifi: !include config/wifi.yaml
 
 #substitutions:
-# Configuration MQTT
+# MQTT Configuration
 #  mqtt_broker: !secret mqtt_broker
 #  mqtt_username: !secret mqtt_username
 #  mqtt_password: !secret mqtt_password
 #  mqtt_topic_base: nexxtender
 
-## Décommentez et modifiez si vous voulez changer le nom de l'appareil
+## Uncomment and modify if you want to change the device name
 # device_name: nexxtender
 # friendly_name: Nexxtender
 
-## Décommentez et modifiez si vous voulez changer les seuils
-# charging_mode_eco_threshold: "8"      # Monophasé (6A + 2 marge)
-# charging_mode_eco_bi_threshold: "14"  # Biphasé (12A + 2 marge)
-# charging_mode_eco_tri_threshold: "20" # Triphasé (18A + 2 marge)
-# slider_max_car_charging_speed: "32"     # Valeur max du slider pour la vitesse de charge max
-# slider_max_available_capacity: "40"     # Valeur max du slider pour la capacité disponible
-# slider_max_peak_consumption_limit: "40" # Limite de consommation de pointe (en ampères, 16-40A typiquement)
-# min_charging_value: "6" # Valeur minimale de charge
-# slider_max_offloading_minimum: "32" # Max de délestage minimum
-# slider_min_offloading_minimum: "6" # Min de délestage minimum
+## Uncomment and modify if you want to change the thresholds
+# charging_mode_eco_threshold: "8"      # Single-phase (6A + 2 margin)
+# charging_mode_eco_bi_threshold: "14"  # Two-phase (12A + 2 margin)
+# charging_mode_eco_tri_threshold: "20" # Three-phase (18A + 2 margin)
+# slider_max_car_charging_speed: "32"     # Max slider value for charging speed
+# slider_max_available_capacity: "40"     # Max slider value for available capacity
+# slider_max_peak_consumption_limit: "40" # Peak consumption limit (in amperes, typically 16-40A)
+# min_charging_value: "6" # Minimum charging value
+# slider_max_offloading_minimum: "32" # Max offloading minimum
+# slider_min_offloading_minimum: "6" # Min offloading minimum
