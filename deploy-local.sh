@@ -8,24 +8,25 @@ function do_exit {
     set -x
   fi
   if [ "$exit_code" -ne 0 ]; then
-    echo "ERREUR: $msg"
+    echo "ERROR: $msg"
   fi
   exit "$exit_code"
 }
 
-## Script de gestion ESPHome Nexxtender
-## Usage: sh pk_tdr.sh [-C] [-c] [-u] [-l]
-# -C : clean (nettoyer le build)
-# -c : compile
-# -u : upload (via OTA nexxtender.local)
-# -l : logs (afficher les logs en temps réel)
-# Sans option : compile + upload + logs
+## ESPHome Nexxtender Local Deployment Script
+## Usage: sh deploy-local.sh [-C] [-c] [-u] [-l] [-d]
+# -C : clean (clean build directory)
+# -c : compile only
+# -u : upload (via OTA to nexxtender.local)
+# -l : logs (display real-time logs)
+# -d : debug mode
+# Without options: compile + upload + logs
 
 yamlFile="nexxtender.local.yaml"
 device="nexxtender.local"
 logFile="nexxtender.log"
 
-# Flags par défaut
+# Default flags
 do_clean=false
 do_compile=false
 do_upload=false
@@ -33,7 +34,7 @@ do_logs=false
 has_options=false
 do_debug=false
 
-# Parser les options
+# Parse options
 while getopts "Cculd" opt; do
   has_options=true
   case $opt in
@@ -54,8 +55,8 @@ while getopts "Cculd" opt; do
       do_debug=true
       ;;
     \?)
-      echo "Option invalide: -$OPTARG" >&2
-      echo "Usage: $0 [-C] [-c] [-u] [-l]"
+      echo "Invalid option: -$OPTARG" >&2
+      echo "Usage: $0 [-C] [-c] [-u] [-l] [-d]"
       exit 1
       ;;
   esac
@@ -65,50 +66,51 @@ if [ "$do_debug" = true ]; then
   set -x
 fi
 
-# Si aucune option, faire compile + upload + logs par défaut
+# If no options provided, run compile + upload + logs by default
 if [ "$has_options" = false ]; then
   do_compile=true
   do_upload=true
   do_logs=true
 fi
 
-# Exécution des commandes selon les flags
-echo "=== ESPHome Nexxtender Manager ==="
-echo "Fichier de configuration: ${yamlFile}"
-echo "Appareil cible: ${device}"
+# Execute commands based on flags
+echo "=== ESPHome Nexxtender Local Deployment ==="
+echo "Configuration file: ${yamlFile}"
+echo "Target device: ${device}"
 echo ""
 
 if [ "$do_clean" = true ]; then
-  echo ">>> Nettoyage du build..."
+  echo ">>> Cleaning build..."
   if ! esphome clean "${yamlFile}"; then
-    do_exit 1 "La commande de nettoyage a échoué"
+    do_exit 1 "Clean command failed"
   fi
-  echo "✓ Nettoyage terminé"
+  echo "✓ Clean completed"
   echo ""
 fi
 
 if [ "$do_compile" = true ]; then
-  echo ">>> Compilation du firmware..."
+  echo ">>> Compiling firmware..."
   if ! esphome compile "${yamlFile}"; then
-    do_exit 1 "La commande de compilation a échoué"
+    do_exit 1 "Compilation failed"
   fi
-  echo "✓ Compilation terminée"
+  echo "✓ Compilation completed"
   echo ""
 fi
 
 if [ "$do_upload" = true ]; then
-  echo ">>> Upload du firmware via OTA..."
+  echo ">>> Uploading firmware via OTA..."
   if ! esphome upload "${yamlFile}" --device "${device}"; then
-    do_exit 1 "La commande d'upload a échoué"
+    do_exit 1 "Upload failed"
   fi
-  echo "✓ Upload terminé"
+  echo "✓ Upload completed"
   echo ""
 fi
 
 if [ "$do_logs" = true ]; then
-  echo ">>> Affichage des logs (Ctrl+C pour quitter)..."
+  echo ">>> Displaying logs (Ctrl+C to quit)..."
+  export PYTHONIOENCODING=utf-8
   esphome logs "${yamlFile}" --device "${device}" | tee -a "${logFile}"
 fi
 
 echo ""
-echo "=== Terminé ==="
+echo "=== Completed ==="
