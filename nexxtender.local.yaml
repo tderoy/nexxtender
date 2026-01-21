@@ -1,30 +1,19 @@
-# Local configuration for ESP32 S3 Nexxtender
-# This configuration uses local files instead of GitHub packages
-
 packages:
-  common: !include config/local.yaml
-  esp_s3: !include config/s3.yaml
+  local: !include config/local.yaml
+  s3: !include config/s3.yaml
   mqtt: !include config/mqtt/false.yaml
   wifi: !include config/wifi.yaml
-
-#substitutions:
-# MQTT Configuration
-#  mqtt_broker: !secret mqtt_broker
-#  mqtt_username: !secret mqtt_username
-#  mqtt_password: !secret mqtt_password
-#  mqtt_topic_base: nexxtender
-
-## Uncomment and modify if you want to change the device name
-# device_name: nexxtender
-# friendly_name: Nexxtender
-
-## Uncomment and modify if you want to change the thresholds
-# charging_mode_eco_threshold: "8"      # Single-phase (6A + 2 margin)
-# charging_mode_eco_bi_threshold: "14"  # Two-phase (12A + 2 margin)
-# charging_mode_eco_tri_threshold: "20" # Three-phase (18A + 2 margin)
-# slider_max_car_charging_speed: "32"     # Max slider value for charging speed
-# slider_max_available_capacity: "40"     # Max slider value for available capacity
-# slider_max_peak_consumption_limit: "40" # Peak consumption limit (in amperes, typically 16-40A)
-# min_charging_value: "6" # Minimum charging value
-# slider_max_offloading_minimum: "32" # Max offloading minimum
-# slider_min_offloading_minimum: "6" # Min offloading minimum
+substitutions:
+  ## Uncomment and modify when you want to use a different device name.
+  # device_name: nexxtender
+  # friendly_name: Nexxtender
+  ## Uncomment and modify when you want to use a different threshold.
+  # charging_mode_eco_threshold: "8"      # Single phase (6A + 2 margin)
+  # charging_mode_eco_bi_threshold: "14"  # Bi-phase (12A + 2 margin)
+  # charging_mode_eco_tri_threshold: "20" # Tri-phase (18A + 2 margin)
+  # slider_max_car_charging_speed: "32"     # The max value of the slider for the maximum car charging speed slider, default set to 32
+  # slider_max_available_capacity: "40"     # The max value of the slider for the maximum available capacity slider, default set to 40
+  # slider_max_peak_consumption_limit: "40" # The peak consumption limit for the slider (in amperes, typically 16-40A). WARNING: Incorrect values may cause circuit breaker trips or reduced charging performance. This value is usually configured by your installer.
+  # min_charging_value: "6" # The minimal charging value, used for the slider configs
+  # slider_max_offloading_minimum: "32" # The max offloading minimum value
+  # slider_min_offloading_minimum: "6" # The min offloading minimum value

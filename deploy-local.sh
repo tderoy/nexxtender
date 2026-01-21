@@ -13,6 +13,57 @@ function do_exit {
   exit "$exit_code"
 }
 
+function do_it() {
+  local do_clean do_compile do_upload do_logs do_debug
+  do_clean=$1
+  do_compile=$2
+  do_upload=$3
+  do_logs=$4
+
+  # Execute commands based on flags
+  echo "=== ESPHome Nexxtender Local Deployment ==="
+  echo "Configuration file: ${yamlFile}"
+  echo "Target device: ${device}"
+  echo ""
+
+  if [ "$do_clean" = true ]; then
+    echo ">>> Cleaning build..."
+    if ! esphome clean "${yamlFile}"; then
+      do_exit 1 "Clean command failed"
+    fi
+    echo "✓ Clean completed"
+    echo ""
+  fi
+
+  if [ "$do_compile" = true ]; then
+    echo ">>> Compiling firmware..."
+    if ! esphome compile "${yamlFile}"; then
+      do_exit 1 "Compilation failed"
+    fi
+    echo "✓ Compilation completed"
+    echo ""
+  fi
+
+  if [ "$do_upload" = true ]; then
+    echo ">>> Uploading firmware via OTA..."
+    if ! esphome upload "${yamlFile}" --device "${device}"; then
+      do_exit 1 "Upload failed"
+    fi
+    echo "✓ Upload completed"
+    echo ""
+  fi
+
+  if [ "$do_logs" = true ]; then
+    echo ">>> Displaying logs (Ctrl+C to quit)..."
+    export PYTHONIOENCODING=utf-8
+    truncate -s 0 "${logFile}"
+    esphome logs "${yamlFile}" --device "${device}" | tee -a "${logFile}"
+  fi
+
+  echo ""
+  echo "=== Completed ==="
+}
+
 ## ESPHome Nexxtender Local Deployment Script
 ## Usage: sh deploy-local.sh [-C] [-c] [-u] [-l] [-d]
 # -C : clean (clean build directory)
@@ -72,45 +123,5 @@ if [ "$has_options" = false ]; then
   do_logs=true
 fi
 
-# Execute commands based on flags
-echo "=== ESPHome Nexxtender Local Deployment ==="
-echo "Configuration file: ${yamlFile}"
-echo "Target device: ${device}"
-echo ""
-
-if [ "$do_clean" = true ]; then
-  echo ">>> Cleaning build..."
-  if ! esphome clean "${yamlFile}"; then
-    do_exit 1 "Clean command failed"
-  fi
-  echo "✓ Clean completed"
-  echo ""
-fi
-
-if [ "$do_compile" = true ]; then
-  echo ">>> Compiling firmware..."
-  if ! esphome compile "${yamlFile}"; then
-    do_exit 1 "Compilation failed"
-  fi
-  echo "✓ Compilation completed"
-  echo ""
-fi
-
-if [ "$do_upload" = true ]; then
-  echo ">>> Uploading firmware via OTA..."
-  if ! esphome upload "${yamlFile}" --device "${device}"; then
-    do_exit 1 "Upload failed"
-  fi
-  echo "✓ Upload completed"
-  echo ""
-fi
-
-if [ "$do_logs" = true ]; then
-  echo ">>> Displaying logs (Ctrl+C to quit)..."
-  export PYTHONIOENCODING=utf-8
-  truncate -s 0 "${logFile}"
-  esphome logs "${yamlFile}" --device "${device}" | tee -a "${logFile}"
-fi
-
-echo ""
-echo "=== Completed ==="
+truncate -s 0 "${logFile}"
+do_it "$do_clean" "$do_compile" "$do_upload" "$do_logs" | tee -a "${logFile}"
