@@ -1,12 +1,6 @@
 #ifndef NEXXTENDER_UTILS_H
 #define NEXXTENDER_UTILS_H
 
-#include <string>
-#include <cstdint>
-#include <cstdio>
-
-using String = std::string;
-
 uint32_t getInt(const std::string x, int i) {
     return (uint32_t(x[i+3]) << 24) | (uint32_t(x[i+2]) << 16) | (uint32_t(x[i+1]) << 8) | uint32_t(x[i]);
 }
