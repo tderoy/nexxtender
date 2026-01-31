@@ -22,3 +22,5 @@ venv-*/
 /secrets.yaml
 
 .idea/**
+
+**/__pycache__/
