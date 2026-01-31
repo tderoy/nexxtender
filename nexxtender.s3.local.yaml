@@ -1,5 +1,6 @@
 packages:
   local: !include config/local.yaml
+  s3: !include config/s3.yaml
   mqtt: !include config/mqtt/false.yaml
   wifi: !include config/wifi.yaml
   webserver: !include config/webserver.yaml

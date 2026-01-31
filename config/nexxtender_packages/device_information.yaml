@@ -9,6 +9,8 @@ substitutions:
 
 text_sensor:
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_information_id_prefix}_model_number
     disabled_by_default: true
     name: "${prefix_text_sensor}Model Number"
@@ -26,6 +28,8 @@ text_sensor:
           id(${device_information_id_prefix}_model_number).publish_state(x);
           logd_s("${device_information_id_prefix}_model_number", x);
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_information_id_prefix}_serial_number
     disabled_by_default: true
     name: "${prefix_text_sensor}Serial Number"
@@ -43,6 +47,8 @@ text_sensor:
           id(${device_information_id_prefix}_serial_number).publish_state(x);
           logd_s("${device_information_id_prefix}_serial_number", x);
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_information_id_prefix}_firmware_revision
     name: "${prefix_text_sensor}Firmware Revision"
     icon: mdi:file-certificate
@@ -59,6 +65,8 @@ text_sensor:
           id(${device_information_id_prefix}_firmware_revision).publish_state(x);
           logd_s("${device_information_id_prefix}_firmware_revision", x);
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_information_id_prefix}_hardware_revision
     disabled_by_default: true
     name: "${prefix_text_sensor}Hardware Revision"

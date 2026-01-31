@@ -1,5 +1,7 @@
 button:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     entity_category: "config"
     name: "${prefix_button}Send dummy break"
     on_press:
@@ -12,6 +14,8 @@ button:
       - lambda: |-
           ESP_LOGD("${device_name}_dummy_break", "Status is: 0x%x", id(g_${generic_data_id_prefix}_status));
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     entity_category: "config"
     name: "${prefix_button}Read CONFIG"
     on_press:
@@ -25,6 +29,8 @@ button:
             id(script_read_config_old).execute();
           }
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     entity_category: "config"
     name: "${prefix_button}Config sending command get"
     on_press:
@@ -34,6 +40,8 @@ button:
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x02, 0x50]
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     entity_category: "config"
     name: "${prefix_button}Config sending command set" #Klaarzetten om config te sturen, als status dan 5001 geeft => GO
     on_press:
@@ -43,6 +51,8 @@ button:
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x01, 0x50]
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     entity_category: "config"
     name: "${prefix_button}Metric next"
     on_press:
@@ -52,6 +62,8 @@ button:
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x01, 0x20]
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     entity_category: "config"
     name: "${prefix_button}Metric update"
     on_press:

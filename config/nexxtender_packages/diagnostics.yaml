@@ -15,6 +15,8 @@ globals:
 ## ---------------------------------------------------
 binary_sensor:
   - platform: status
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_binary_sensor}Status
     entity_category: diagnostic
     disabled_by_default: true
@@ -24,6 +26,8 @@ binary_sensor:
 ## ---------------------------------------------------
 switch:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_switch}Reset boot counter
     turn_on_action:
       then:
@@ -39,6 +43,8 @@ switch:
 ## ---------------------------------------------------
 sensor:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_sensor}Boot counter
     id: bootcounter
     accuracy_decimals: 0
@@ -48,6 +54,8 @@ sensor:
     disabled_by_default: true
 
   - platform: uptime
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_sensor}Uptime Sensor
     id: uptime_sensor
     icon: mdi:clock-start
@@ -74,6 +82,8 @@ sensor:
     disabled_by_default: true
 
   - platform: wifi_signal
+    web_server:
+      sorting_group_id: sorting_group_details
     id: wifi_signal_strength
     name: ${prefix_sensor}WiFi Signal Strength
     update_interval: ${diagnostics_update_interval}
@@ -81,6 +91,8 @@ sensor:
     disabled_by_default: true
 
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     id: sensor_wifi_signal_percentage
     name: ${prefix_sensor}WiFi Signal Percentage
     icon: mdi:wifi
@@ -102,11 +114,15 @@ sensor:
 ## ---------------------------------------------------
 text_sensor:
   - platform: version
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_text_sensor}Esphome Version
     entity_category: diagnostic
     disabled_by_default: true
 
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_text_sensor}Uptime
     id: uptime_human
     icon: mdi:clock-start
@@ -114,6 +130,8 @@ text_sensor:
     disabled_by_default: true
 
   - platform: wifi_info
+    web_server:
+      sorting_group_id: sorting_group_details
     ip_address:
       name: ${prefix_text_sensor}IP
       icon: mdi:ip-network
@@ -127,6 +145,8 @@ text_sensor:
       name: ${prefix_text_sensor}Wifi Mac Address
       icon: mdi:wifi
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_text_sensor}Timestamp
     lambda: char str[20];
       time_t currTime = id(sntp_time).now().timestamp;
@@ -135,6 +155,8 @@ text_sensor:
     entity_category: diagnostic
     disabled_by_default: true
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: ${prefix_text_sensor}Uptime (formatted)
     icon: mdi:clock-start
     update_interval: 15s

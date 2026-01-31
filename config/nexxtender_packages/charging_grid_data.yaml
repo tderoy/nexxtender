@@ -20,6 +20,8 @@ globals:
 
 sensor:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_grid_prefix} Timestamp"
     id: ${charging_grid_id_prefix}_timestamp
     icon: mdi:clock-time-eight
@@ -30,6 +32,8 @@ sensor:
     lambda: |-
       return id(g_${charging_grid_id_prefix}_timestamp);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_grid_prefix} L1"
     id: ${charging_grid_id_prefix}_l1
     icon: mdi:home-floor-1
@@ -43,6 +47,8 @@ sensor:
     lambda: |-
       return id(g_${charging_grid_id_prefix}_l1);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_grid_prefix} L2"
     id: ${charging_grid_id_prefix}_l2
     icon: mdi:home-floor-2
@@ -56,6 +62,8 @@ sensor:
     lambda: |-
       return id(g_${charging_grid_id_prefix}_l2);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_grid_prefix} L3"
     id: ${charging_grid_id_prefix}_l3
     icon: mdi:home-floor-3
@@ -69,6 +77,8 @@ sensor:
     lambda: |-
       return id(g_${charging_grid_id_prefix}_l3);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_grid_prefix} Consumed"
     id: ${charging_grid_id_prefix}_consumed
     icon: mdi:sigma
@@ -80,6 +90,8 @@ sensor:
     lambda: |-
       return id(g_${charging_grid_id_prefix}_consumed);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_grid_prefix} Interval"
     id: ${charging_grid_id_prefix}_interval
     icon: mdi:camera-timer
@@ -92,6 +104,8 @@ sensor:
 
 text_sensor:
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_name}_charging_grid_data
     internal: true
     ble_client_id: ${device_name}_ble_client_id

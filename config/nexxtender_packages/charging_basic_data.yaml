@@ -72,6 +72,8 @@ globals:
 
 sensor:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_basic_prefix} Seconds"
     id: ${charging_basic_id_prefix}_seconds
     icon: mdi:timelapse
@@ -83,6 +85,8 @@ sensor:
     lambda: |-
       return id(g_${charging_basic_id_prefix}_seconds);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_summary
     name: "${prefix_sensor}Energy"
     id: ${charging_basic_id_prefix}_energy
     icon: mdi:flash
@@ -96,6 +100,8 @@ sensor:
     lambda: |-
       return id(g_${charging_basic_id_prefix}_energy);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}Charging Phase Count"
     id: ${charging_basic_id_prefix}_phase_count
     icon: mdi:counter
@@ -306,6 +312,8 @@ interval:
 
 text_sensor:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_text_sensor}Discriminator"
     id: ${charging_basic_id_prefix}_discriminator
     icon: mdi:battery-charging-100
@@ -313,6 +321,8 @@ text_sensor:
     lambda: |-
       return id(g_${charging_basic_id_prefix}_discriminator);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_summary
     name: "${prefix_text_sensor}Status"
     id: ${charging_basic_id_prefix}_status
     icon: mdi:ev-station
@@ -320,6 +330,8 @@ text_sensor:
     lambda: |-
       return id(g_${charging_basic_id_prefix}_status);
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_name}_charging_basic_data
     internal: true
     ble_client_id: ${device_name}_ble_client_id

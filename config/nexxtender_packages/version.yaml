@@ -4,5 +4,7 @@ text_sensor:
     id: nexxtender_code_version
     icon: mdi:file-certificate
     entity_category: diagnostic
+    web_server:
+      sorting_group_id: sorting_group_details
     lambda: |-
       return {"v5.1.0"};
