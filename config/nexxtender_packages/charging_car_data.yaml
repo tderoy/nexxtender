@@ -28,6 +28,8 @@ globals:
 
 sensor:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} Timestamp"
     id: ${charging_car_id_prefix}_timestamp
     icon: mdi:clock-time-eight
@@ -38,6 +40,8 @@ sensor:
     lambda: |-
       return id(g_${charging_car_id_prefix}_timestamp);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} Current"
     id: ${charging_car_id_prefix}_current
     icon: mdi:current-ac
@@ -51,6 +55,8 @@ sensor:
     lambda: |-
       return id(g_${charging_car_id_prefix}_l1)+id(g_${charging_car_id_prefix}_l2)+id(g_${charging_car_id_prefix}_l3);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} L1"
     id: ${charging_car_id_prefix}_l1
     icon: mdi:home-floor-1
@@ -64,6 +70,8 @@ sensor:
     lambda: |-
       return id(g_${charging_car_id_prefix}_l1);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} L2"
     id: ${charging_car_id_prefix}_l2
     icon: mdi:home-floor-2
@@ -77,6 +85,8 @@ sensor:
     lambda: |-
       return id(g_${charging_car_id_prefix}_l2);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} L3"
     id: ${charging_car_id_prefix}_l3
     icon: mdi:home-floor-3
@@ -90,6 +100,8 @@ sensor:
     lambda: |-
       return id(g_${charging_car_id_prefix}_l3);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} P1"
     id: ${charging_car_id_prefix}_p1
     icon: mdi:home-floor-1
@@ -103,6 +115,8 @@ sensor:
     lambda: |-
       return id(g_${charging_car_id_prefix}_p1);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} P2"
     id: ${charging_car_id_prefix}_p2
     icon: mdi:home-floor-1
@@ -116,6 +130,8 @@ sensor:
     lambda: |-
       return id(g_${charging_car_id_prefix}_p2);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_car_prefix} P3"
     id: ${charging_car_id_prefix}_p3
     icon: mdi:home-floor-1
@@ -131,6 +147,8 @@ sensor:
 
 text_sensor:
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_name}_charging_car_data
     internal: true
     ble_client_id: ${device_name}_ble_client_id

@@ -2,3 +2,19 @@ web_server:
   auth:
     username: admin
     password: !secret esphome_admin_password
+  version: 3
+  local: true
+  ota: false
+  sorting_groups:
+    - id: sorting_group_summary
+      name: "1. Summary"
+      sorting_weight: 10
+    - id: sorting_group_action
+      name: "2. Action"
+      sorting_weight: 20
+    - id: sorting_group_maintenance
+      name: "3. Maintenance"
+      sorting_weight: 30
+    - id: sorting_group_details
+      name: "4. Details"
+      sorting_weight: 40

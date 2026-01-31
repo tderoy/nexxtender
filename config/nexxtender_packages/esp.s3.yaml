@@ -22,6 +22,8 @@ light:
     num_leds: 1
     chipset: ws2812
     name: ${prefix_light}${friendly_name}
+    web_server:
+      sorting_group_id: sorting_group_details
     effects:
       - pulse:
           name: Pulse

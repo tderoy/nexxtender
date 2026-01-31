@@ -74,6 +74,8 @@ sensor:
     state_class: measurement
     accuracy_decimals: 0
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_sensor}Maximum available capacity"
     id: ${generic_data_id_prefix}_i_max
@@ -83,6 +85,8 @@ sensor:
     state_class: measurement
     accuracy_decimals: 0
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_sensor}Offloading minimum"
     id: ${generic_data_id_prefix}_i_min
@@ -92,6 +96,8 @@ sensor:
     state_class: measurement
     accuracy_decimals: 0
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_sensor}Maximum car charging speed"
     id: ${generic_data_id_prefix}_i_evse_max
@@ -101,6 +107,8 @@ sensor:
     state_class: measurement
     accuracy_decimals: 0
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_sensor}Minimum car charging speed"
     id: ${generic_data_id_prefix}_i_evse_min
@@ -110,6 +118,8 @@ sensor:
     state_class: measurement
     accuracy_decimals: 0
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_sensor}Peak consumption limit"
     id: ${generic_data_id_prefix}_i_capacity
@@ -119,6 +129,8 @@ sensor:
     state_class: measurement
     accuracy_decimals: 0
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
 
 text_sensor:
   - platform: template
@@ -126,11 +138,15 @@ text_sensor:
     id: ${generic_data_id_prefix}_charge_mode
     icon: mdi:speedometer
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_text_sensor}Connection type"
     id: ${generic_data_id_prefix}_connection_type
     icon: mdi:transmission-tower
     update_interval: ${generic_data_update_interval}
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_text_sensor}Week schema"
     id: ${generic_data_id_prefix}_week_schema
@@ -140,6 +156,8 @@ text_sensor:
       char time_string[20];
       sprintf(time_string, "%s - %s", id(g_${generic_data_id_prefix}_week_start).c_str(), id(g_${generic_data_id_prefix}_week_end).c_str());
       return optional<std::string>(time_string);
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_text_sensor}Weekend schema"
     id: ${generic_data_id_prefix}_weekend_schema
@@ -149,12 +167,16 @@ text_sensor:
       char time_string[20];
       sprintf(time_string, "%s - %s", id(g_${generic_data_id_prefix}_weekend_start).c_str(), id(g_${generic_data_id_prefix}_weekend_end).c_str());
       return optional<std::string>(time_string);
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_text_sensor}Generic Status"
     id: ${device_name}_generic_status
     icon: mdi:information-box
     update_interval: ${generic_data_update_interval}
     entity_category: diagnostic
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: ble_client
     id: ${device_name}_generic_status_internal
     name: ${prefix_text_sensor}Generic Internal Status
@@ -164,6 +186,8 @@ text_sensor:
     characteristic_uuid: ${ble_uuid_generic_status}
     update_interval: never
     notify: true
+    web_server:
+      sorting_group_id: sorting_group_details
     on_notify:
       then:
         lambda: |-
@@ -269,6 +293,8 @@ text_sensor:
     #ESP_LOGD("${device_name}_generic_data", "Status is: %d", id(g_${generic_data_id_prefix}_status));
     #return hex_data;
     notify: true
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_text_sensor}Nexxtender Time"
     id: ${generic_data_id_prefix}_human_time
@@ -277,6 +303,8 @@ text_sensor:
     entity_category: diagnostic
     lambda: |-
       return id(g_${generic_data_id_prefix}_time);
+    web_server:
+      sorting_group_id: sorting_group_details
 
 script:
   - id: delay_5s
@@ -849,6 +877,8 @@ button:
       then:
         - lambda: |-
             id(switch_charger_mode).execute();
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_button}Start Charge Default"
     icon: mdi:alpha-d-circle-outline
@@ -858,6 +888,8 @@ button:
           service_uuid: ${ble_uuid_receive_service}
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x01, 0x00]
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_button}Start Charge Max"
     icon: mdi:alpha-m-circle-outline
@@ -867,6 +899,8 @@ button:
           service_uuid: ${ble_uuid_receive_service}
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x02, 0x00]
+    web_server:
+      sorting_group_id: sorting_group_action
   - platform: template
     name: "${prefix_button}Start Charge Auto"
     icon: mdi:alpha-a-circle-outline
@@ -876,6 +910,8 @@ button:
           service_uuid: ${ble_uuid_receive_service}
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x03, 0x00]
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: "${prefix_button}Start Charge Eco"
     icon: mdi:alpha-e-circle-outline
@@ -885,6 +921,8 @@ button:
           service_uuid: ${ble_uuid_receive_service}
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x04, 0x00]
+    web_server:
+      sorting_group_id: sorting_group_action
   - platform: template
     name: "${prefix_button}Stop Charging"
     icon: mdi:stop-circle-outline
@@ -894,6 +932,8 @@ button:
           service_uuid: ${ble_uuid_receive_service}
           characteristic_uuid: ${ble_uuid_generic_command}
           value: [0x06, 0x00]
+    web_server:
+      sorting_group_id: sorting_group_action
   - platform: template
     name: ${prefix_button}Read time
     icon: mdi:clock-time-eight-outline
@@ -902,6 +942,8 @@ button:
       then:
         - lambda: |-
             id(script_read_time).execute();
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     name: ${prefix_button}Sync time
     icon: mdi:timer-refresh-outline
@@ -910,6 +952,8 @@ button:
       then:
         - lambda: |-
             id(script_sync_time).execute();
+    web_server:
+      sorting_group_id: sorting_group_details
 
 number:
   - platform: template
@@ -939,6 +983,8 @@ number:
             id(g_${generic_data_id_prefix}_i_min) = value;
             id(script_send_config_old).execute();
           }
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     id: max_charging_speed
     name: ${prefix_number}Maximum car charging speed
@@ -966,6 +1012,8 @@ number:
             id(g_${generic_data_id_prefix}_i_evse_max) = value;
             id(script_send_config_old).execute();
           }
+    web_server:
+      sorting_group_id: sorting_group_details
   - platform: template
     id: max_available_capacity
     name: ${prefix_number}Maximum available capacity
@@ -993,6 +1041,8 @@ number:
             id(g_${generic_data_id_prefix}_i_max) = value;
             id(script_send_config_old).execute();
           }
+    web_server:
+      sorting_group_id: sorting_group_details
 
   - platform: template
     id: peak_consumption_limit
@@ -1022,6 +1072,8 @@ number:
             id(g_${generic_data_id_prefix}_peak_consumption_limit_set) = true;
             id(script_read_config).execute();
           }
+    web_server:
+      sorting_group_id: sorting_group_details
 
 select:
   - platform: template
@@ -1066,6 +1118,8 @@ select:
             id(g_${generic_data_id_prefix}_charge_mode) = value_int;
             id(script_send_config_old).execute();
           }
+    web_server:
+      sorting_group_id: sorting_group_details
 
 binary_sensor:
   - platform: gpio

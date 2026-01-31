@@ -19,6 +19,8 @@ globals:
 
 sensor:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_advanced_prefix} Timestamp"
     id: ${charging_advanced_id_prefix}_timestamp
     icon: mdi:clock-time-eight
@@ -29,6 +31,8 @@ sensor:
     lambda: |-
       return id(g_${charging_advanced_id_prefix}_timestamp);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}Available capacity"
     id: ${charging_advanced_id_prefix}_i_available
     icon: mdi:current-ac
@@ -40,6 +44,8 @@ sensor:
     lambda: |-
       return id(g_${charging_advanced_id_prefix}_i_available);
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}Grid Power"
     id: ${charging_advanced_id_prefix}_grid_power
     icon: mdi:sigma
@@ -51,6 +57,8 @@ sensor:
     lambda: |-
       return id(g_${charging_advanced_id_prefix}_grid_power);
   - platform: integration
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_advanced_prefix} Grid Energy"
     sensor: ${charging_advanced_id_prefix}_grid_power
     time_unit: h
@@ -59,6 +67,8 @@ sensor:
     device_class: energy
     icon: mdi:transmission-tower
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_advanced_prefix} Grid Power Consumed"
     id: grid_power_consumed
     unit_of_measurement: "W"
@@ -72,6 +82,8 @@ sensor:
         return 0;
       }
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_advanced_prefix} Grid Power Produced"
     id: grid_power_produced
     unit_of_measurement: "W"
@@ -85,6 +97,8 @@ sensor:
         return 0;
       }
   - platform: integration
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_advanced_prefix} Grid Energy Consumed"
     sensor: grid_power_consumed
     time_unit: h
@@ -93,6 +107,8 @@ sensor:
     device_class: energy
     icon: mdi:transmission-tower-import
   - platform: integration
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_sensor}${charging_advanced_prefix} Grid Energy Produced"
     sensor: grid_power_produced
     time_unit: h
@@ -101,6 +117,8 @@ sensor:
     device_class: energy
     icon: mdi:transmission-tower-export
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_summary
     name: "${prefix_sensor}Car Power"
     id: ${charging_advanced_id_prefix}_car_power
     icon: mdi:sigma
@@ -116,6 +134,8 @@ sensor:
 
 text_sensor:
   - platform: template
+    web_server:
+      sorting_group_id: sorting_group_details
     name: "${prefix_text_sensor}Car Power Mode"
     id: ${charging_advanced_id_prefix}_car_power_mode
     icon: mdi:speedometer
@@ -145,6 +165,8 @@ text_sensor:
       return std::string("Max");
 
   - platform: ble_client
+    web_server:
+      sorting_group_id: sorting_group_details
     id: ${device_name}_charging_advanced_data
     internal: true
     ble_client_id: ${device_name}_ble_client_id
